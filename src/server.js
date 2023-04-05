@@ -60,9 +60,9 @@ app.get("/", async (req, res) => {
     solicitacaoPagador: "Cobrança do LinkPed",
   };
 
-  console.log('Bateu na rota')
   const cobResponse = await reqGN.post("/v2/cob", dataCob);
-  res.send(cobResponse.data);
+  const qrcodeResponse = await reqGN.get(`/v2/loc/${cobResponse.data.loc.id}/qrcode`);
+  res.send(qrcodeResponse.data);
 
   /*curl --request POST \
     --url https://api-pix-h.gerencianet.com.br/oauth/token \
