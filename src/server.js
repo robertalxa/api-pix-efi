@@ -62,15 +62,7 @@ app.get("/", async (req, res) => {
 
   const cobResponse = await reqGN.post("/v2/cob", dataCob);
   const qrcodeResponse = await reqGN.get(`/v2/loc/${cobResponse.data.loc.id}/qrcode`);
-  res.send(qrcodeResponse.data);
-
-  /*curl --request POST \
-    --url https://api-pix-h.gerencianet.com.br/oauth/token \
-    --header 'Authorization: Basic Q2xpZW50X0lkXzNlZDZmMDZmMzQ3ZWUxYjY1NWY2MmI2ZDI3OTdkYWFhODk1MTAzZDM6Q2xpZW50X1NlY3JldF8yMDllZTVjZWVkYWIzMDBhNzFmMzI2MTZmNjE4NzI5NzAyMmNmYWMw' \
-    --header 'Content-Type: application/json' \
-    --data '{
-    "grant_type": "client_credentials"
-  }'*/
+  res.render('qrcode', {qrcodeImage: qrcodeResponse.data.imagemQrcode});
 });
 
 app.listen(8000, () => {
