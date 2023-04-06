@@ -3,9 +3,11 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const express = require("express");
+const bodyParser = require('body-parser');
 const GNRequest = require('./apis/gerencianet');
 const app = express();
 
+app.use(bodyParser.json());
 app.set("view engine", "ejs");
 app.set("views", "src/views");
 const reqGNAlready = GNRequest({
@@ -39,6 +41,11 @@ app.get('/cobrancas', async (req, res) => {
   const dataOntem = new Date(dataHoje.getTime() - 86400000);
   const cobrancasResponse = await reqGN.get(`/v2/cob?inicio=${dataOntem.toJSON()}&fim=${dataHoje.toJSON()}`);
   res.send(cobrancasResponse.data);
+});
+
+app.post('/webhook(/pix)?', (req, res) => {
+  console.log(req.body);
+  res.send('200');
 });
 
 app.listen(8000, () => {
