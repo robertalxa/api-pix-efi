@@ -22,7 +22,7 @@ app.get("/", async (req, res) => {
       expiracao: 3600,
     },
     valor: {
-      original: "100.00",
+      original: "0.10",
     },
     chave: "12460f5a-63c9-41b0-905f-927f7da55cdb",
     solicitacaoPagador: "Cobrança do LinkPed",
