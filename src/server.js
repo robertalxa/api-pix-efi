@@ -45,7 +45,7 @@ app.get('/cobrancas', async (req, res) => {
 
 app.post('/webhook(/pix)?', (req, res) => {
   console.log(req.body);
-  res.send('200');
+  res.render("pago");
 });
 
 app.listen(8000, () => {
